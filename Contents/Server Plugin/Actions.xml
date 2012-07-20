@@ -1,22 +1,17 @@
 <?xml version="1.0"?>
 <Actions>
-	<SupportURL>http://www.chadfrancis.com</SupportURL>
-	<Action id="foo" deviceFilter="self">
-		<Name>Foo</Name>
-		<CallbackMethod>foo</CallbackMethod>
-	</Action>
-	<Action id="bar" deviceFilter="self">
-		<Name>Bar</Name>
-		<CallbackMethod>bar</CallbackMethod>
+	<Action id="send">
+		<Name>Send Push Notification</Name>
+		<CallbackMethod>send</CallbackMethod>
 		<ConfigUI>
 			<SupportURL>http://www.chadfrancis.com</SupportURL>
-			<Field id="pickme1" type="checkbox" default="no">
-				<Label>pick me:</Label>
-				<Description>lets see where this shows up</Description>
+			<Field id="txttitle" type="textbox" default="">
+				<Label>Subject:</Label>
+				<Description>message title goes here</Description>
 			</Field>
-			<Field id="pickme2" type="checkbox" default="no">
-				<Label>no, pick me:</Label>
-				<Description>how about this one</Description>
+			<Field id="txtmessage" type="message" default="">
+				<Label>Message:</Label>
+				<Description>message body goes here</Description>
 			</Field>
 		</ConfigUI>
 	</Action>

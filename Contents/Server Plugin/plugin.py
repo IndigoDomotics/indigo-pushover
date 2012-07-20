@@ -30,8 +30,5 @@ class Plugin(indigo.PluginBase):
 	########################################
 	# Plugin Actions object callbacks (pluginAction is an Indigo plugin action instance)
 	######################
-	def foo(self, pluginAction):
-		self.debugLog("foo action called:\n" + str(pluginAction))
-
-	def bar(self, pluginAction):
-		self.debugLog("bar action called:\n" + str(pluginAction))
+	def send(self, pluginAction):
+		self.debugLog("send action called:\n" + str(pluginAction))
