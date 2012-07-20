@@ -1,22 +1,22 @@
 <?xml version="1.0"?>
 <Actions>
-	<SupportURL>http://www.perceptiveautomation.com/wiki/doku.php?id=plugins:example_dev_1</SupportURL>
-	<Action id="resetHardware" deviceFilter="self">
-		<Name>Reset Hardware</Name>
-		<CallbackMethod>resetHardware</CallbackMethod>
+	<SupportURL>http://www.chadfrancis.com</SupportURL>
+	<Action id="foo" deviceFilter="self">
+		<Name>Foo</Name>
+		<CallbackMethod>foo</CallbackMethod>
 	</Action>
-	<Action id="updateHardwareFirmware" deviceFilter="self">
-		<Name>Update Hardware Firmware</Name>
-		<CallbackMethod>updateHardwareFirmware</CallbackMethod>
+	<Action id="bar" deviceFilter="self">
+		<Name>Bar</Name>
+		<CallbackMethod>bar</CallbackMethod>
 		<ConfigUI>
-			<SupportURL>http://www.perceptiveautomation.com/wiki/doku.php?id=plugins:example_dev_1</SupportURL>
-			<Field id="updateToLatestBeta" type="checkbox" default="no">
-				<Label>Update to latest beta (example):</Label>
-				<Description>Update to the latest beta version (not really)</Description>
+			<SupportURL>http://www.chadfrancis.com</SupportURL>
+			<Field id="pickme1" type="checkbox" default="no">
+				<Label>pick me:</Label>
+				<Description>lets see where this shows up</Description>
 			</Field>
-			<Field id="notifyBetaUpdates" type="checkbox" default="no">
-				<Label>Notify on new betas (example):</Label>
-				<Description>Send notifications when there's a new beta version (not really)</Description>
+			<Field id="pickme2" type="checkbox" default="no">
+				<Label>no, pick me:</Label>
+				<Description>how about this one</Description>
 			</Field>
 		</ConfigUI>
 	</Action>
