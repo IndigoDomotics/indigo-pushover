@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PluginConfig>
+	<Field type="checkbox" id="enabled" defaultValue="no">
+			<Label>Enable Push Notifications</Label>
+	</Field>
+	<Field id="label0" type="label">
+		<Label>explanatory text goes here</Label>
+	</Field>
+	<Field id="applicationapikey" type="textfield" defaultValue="">
+		<Label>App API Key:</Label>
+	</Field>
+	<Field id="userkey" type="textfield" defaultValue="">
+		<Label>User Key:</Label>
+	</Field>
+	<Field id="username" type="textfield" defaultValue="">
+		<Label>User Name:</Label>
+	</Field>
+</PluginConfig>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<Actions>
+	<SupportURL>http://www.perceptiveautomation.com/wiki/doku.php?id=plugins:example_dev_1</SupportURL>
+	<Action id="resetHardware" deviceFilter="self">
+		<Name>Reset Hardware</Name>
+		<CallbackMethod>resetHardware</CallbackMethod>
+	</Action>
+	<Action id="updateHardwareFirmware" deviceFilter="self">
+		<Name>Update Hardware Firmware</Name>
+		<CallbackMethod>updateHardwareFirmware</CallbackMethod>
+		<ConfigUI>
+			<SupportURL>http://www.perceptiveautomation.com/wiki/doku.php?id=plugins:example_dev_1</SupportURL>
+			<Field id="updateToLatestBeta" type="checkbox" default="no">
+				<Label>Update to latest beta (example):</Label>
+				<Description>Update to the latest beta version (not really)</Description>
+			</Field>
+			<Field id="notifyBetaUpdates" type="checkbox" default="no">
+				<Label>Notify on new betas (example):</Label>
+				<Description>Send notifications when there's a new beta version (not really)</Description>
+			</Field>
+		</ConfigUI>
+	</Action>
+</Actions>
