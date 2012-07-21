@@ -5,11 +5,11 @@
 		<CallbackMethod>send</CallbackMethod>
 		<ConfigUI>
 			<SupportURL>http://www.chadfrancis.com</SupportURL>
-			<Field id="txttitle" type="textbox" default="">
+			<Field id="txttitle" type="textfield" default="">
 				<Label>Subject:</Label>
 				<Description>message title goes here</Description>
 			</Field>
-			<Field id="txtmessage" type="message" default="">
+			<Field id="txtmessage" type="textfield" default="">
 				<Label>Message:</Label>
 				<Description>message body goes here</Description>
 			</Field>
