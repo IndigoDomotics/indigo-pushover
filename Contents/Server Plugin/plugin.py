@@ -29,10 +29,10 @@ class Plugin(indigo.PluginBase):
 			"POST",
 			"/1/messages",
 			urllib.urlencode({
-				# API token
-				"token": "Uxty2Vpz385ZLbCSNVZUWicQ2vPFEd",
-				# user token
-				"user": "PI7mxIKNpImeMlsn80elalL4iR02oI",
+				# retrieve application API token from plugin preferences dict
+				"token": self.pluginPrefs["applicationapikey"],
+				# retrieve user token from plugin preferences dict
+				"user": self.pluginPrefs["userkey"],
 				"title": pluginAction.props["txttitle"],
 				"message": pluginAction.props["txtmessage"],
 			}),
