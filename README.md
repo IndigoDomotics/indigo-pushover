@@ -1,4 +1,4 @@
-indigo_pushover
+indigo-pushover
 ===============
 This is a plugin for Indigo (mac-based home automation server) that allows users to send push notifications to their phones via Pushover. 
 This might be useful in cases where you want to be alerted for certain events (entry door opened, doorbell ring, motion sensor tripped etc.).

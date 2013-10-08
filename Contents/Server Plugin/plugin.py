@@ -1,8 +1,5 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
-####################
-# Copyright (c) 2012, Chad Francis. All rights reserved.
-# http://www.chadfrancis.com
 
 import httplib, urllib, sys, os
 
@@ -38,4 +35,3 @@ class Plugin(indigo.PluginBase):
 			}),
 			{ "Content-type": "application/x-www-form-urlencoded" }
 		)
-

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <PluginConfig>
 	<Field type="checkbox" id="enabled" defaultValue="no">
-			<Label>Enable Push Notifications</Label>
+		<Label>Enable Push Notifications</Label>
 	</Field>
 	<Field id="label0" type="label">
 		<Label>explanatory text goes here</Label>
