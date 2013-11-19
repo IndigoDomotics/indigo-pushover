@@ -1,12 +1,14 @@
 indigo-pushover
 ===============
-This is a plugin for Indigo (mac-based home automation server) that allows users to send push notifications to their phones via Pushover. 
-This might be useful in cases where you want to be alerted for certain events (entry door opened, doorbell ring, motion sensor tripped etc.).
 
-Please note that this is a work in progress and, although I am striving towards a beta release, it is not recommended for public use at this time...
+[Indigo](http://www.perceptiveautomation.com/indigo/index.html) plugin to facilitate sending push notifications to mobile devices via [Pushover](http://www.pushover.net).
 
-Additional Info
-------------
+### Requirements
 
-- [Indigo Home Automation Server](http://www.perceptiveautomation.com/indigo/index.html)
-- [Pushover](http://www.pushover.net)
+1. [Indigo 6](http://www.perceptiveautomation.com/indigo/index.html) or later (pro version only)
+2. Valid [Pushover](https://pushover.net/faq#overview-what) user key
+
+### Installation Instructions
+
+1. Download latest release [here](https://github.com/discgolfer1138/indigo-pushover/releases)
+2. Follow [standard plugin installation process](http://www.perceptiveautomation.com/wiki/doku.php?id=indigo_6_documentation:getting_started#installing_plugins_and_configuring_plugin_settings_pro_only_feature)

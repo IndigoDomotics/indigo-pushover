@@ -4,7 +4,7 @@
 		<Name>Send Push Notification</Name>
 		<CallbackMethod>send</CallbackMethod>
 		<ConfigUI>
-			<SupportURL>http://www.chadfrancis.com</SupportURL>
+			<SupportURL>https://github.com/discgolfer1138/indigo-pushover/issues</SupportURL>
 			<Field id="txttitle" type="textfield" default="">
 				<Label>Subject:</Label>
 				<Description>message title goes here</Description>
