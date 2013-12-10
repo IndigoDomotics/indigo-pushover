@@ -6,7 +6,7 @@ indigo-pushover
 ### Requirements
 
 1. [Indigo 6](http://www.perceptiveautomation.com/indigo/index.html) or later (pro version only)
-2. Valid Pushover [API key](https://pushover.net/faq#overview-what)
+2. Valid Pushover [API key](https://pushover.net/api)
 3. Valid Pushover [user key](https://pushover.net/faq#overview-what)
 
 ### Installation Instructions
