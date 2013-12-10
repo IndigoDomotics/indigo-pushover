@@ -12,7 +12,7 @@ indigo-pushover
 ### Installation Instructions
 
 1. Download latest release [here](https://github.com/discgolfer1138/indigo-pushover/releases)
-2. Follow [standard plugin installation process](http://www.perceptiveautomation.com/wiki/doku.php?id=indigo_6_documentation:getting_started#installing_plugins_and_configuring_plugin_settings_pro_only_feature)
+2. Follow [standard plugin installation process](http://bit.ly/1e1Vc7b)
 
 ### Actions Supported
 * Send Push Notification (subject and message are configurable)
