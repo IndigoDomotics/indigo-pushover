@@ -21,17 +21,34 @@ class Plugin(indigo.PluginBase):
 
 	# actions go here
 	def send(self, pluginAction):
+		pushtoken = self.pluginPrefs["applicationapikey"]
+
+		if pluginAction.props["pushtoken"]:
+			pushtoken = pluginAction.props["pushtoken"]
+
+		pushtitle = pluginAction.props["txttitle"]
+
+		while "%%v:" in pushtitle:
+			pushtitle = self.substituteVariable(pushtitle)
+		
+		pushmessage = pluginAction.props["txtmessage"]
+
+		while "%%v:" in pushmessage:
+			pushmessage = self.substituteVariable(pushmessage)
+		
 		conn = httplib.HTTPSConnection("api.pushover.net:443")
 		conn.request(
 			"POST",
 			"/1/messages",
 			urllib.urlencode({
-				# retrieve application API token from plugin preferences dict
-				"token": self.pluginPrefs["applicationapikey"],
-				# retrieve user token from plugin preferences dict
+				"token": pushtoken,
 				"user": self.pluginPrefs["userkey"],
-				"title": pluginAction.props["txttitle"],
-				"message": pluginAction.props["txtmessage"],
+				"title": pushtitle,
+				"message": pushmessage,
+				"device": pluginAction.props["pushdevice"],
+				"sound": pluginAction.props["pushsound"],
+				"url": pluginAction.props["pushurl"],
+				"url_title": pluginAction.props["pushurltitle"],
 			}),
 			{ "Content-type": "application/x-www-form-urlencoded" }
 		)

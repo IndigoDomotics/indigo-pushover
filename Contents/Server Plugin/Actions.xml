@@ -5,13 +5,58 @@
 		<CallbackMethod>send</CallbackMethod>
 		<ConfigUI>
 			<SupportURL>https://github.com/discgolfer1138/indigo-pushover/issues</SupportURL>
+			<Field id="pushtoken" type="textfield" default="">
+				<Label>Token:</Label>
+				<Description>Application token</Description>
+			</Field>
+			<Field id="pushSeparator" type="separator"/>
 			<Field id="txttitle" type="textfield" default="">
-				<Label>Subject:</Label>
-				<Description>message title goes here</Description>
+				<Label>Title:</Label>
+				<Description>Title</Description>
 			</Field>
 			<Field id="txtmessage" type="textfield" default="">
 				<Label>Message:</Label>
-				<Description>message body goes here</Description>
+				<Description>Message body text</Description>
+			</Field>
+			<Field id="pushsound" type="menu" defaultValue="pushover">
+				<Label>Sound:</Label>
+				<List>
+					<Option value="pushover">Pushover (default)</Option>
+					<Option value="bike">Bike</Option>
+					<Option value="bugle">Bugle</Option>
+					<Option value="cashregister">Cash Register</Option>
+					<Option value="classical">Classical</Option>
+					<Option value="cosmic">Cosmic</Option>
+					<Option value="falling">Falling</Option>
+					<Option value="gamelan">Gamelan</Option>
+					<Option value="incoming">Incoming</Option>
+					<Option value="intermission">Intermission</Option>
+					<Option value="magic">Magic</Option>
+					<Option value="mechanical">Mechanical</Option>
+					<Option value="pianobar">Piano Bar</Option>
+					<Option value="siren">Siren</Option>
+					<Option value="spacealarm">Space Alarm</Option>
+					<Option value="tugboat">Tug Boat</Option>
+					<Option value="alien">Alien Alarm (long)</Option>
+					<Option value="climb">Climb (long)</Option>
+					<Option value="persistent">Persistent (long)</Option>
+					<Option value="echo">Pushover Echo (long)</Option>
+					<Option value="updown">Up Down (long)</Option>
+					<Option value="none">None (silent)</Option>
+				</List>
+				<Description>message sound goes here</Description>
+			</Field>
+			<Field id="pushdevice" type="textfield" default="">
+				<Label>Device:</Label>
+				<Description>Device name</Description>
+			</Field>
+			<Field id="pushurl" type="textfield" default="">
+				<Label>URL:</Label>
+				<Description>Supplementary URL</Description>
+			</Field>
+			<Field id="pushurltitle" type="textfield" default="">
+				<Label>URL Title:</Label>
+				<Description>Supplementary URL Title</Description>
 			</Field>
 		</ConfigUI>
 	</Action>
