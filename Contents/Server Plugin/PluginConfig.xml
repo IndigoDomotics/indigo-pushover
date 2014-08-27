@@ -2,10 +2,15 @@
 <PluginConfig>
 	<Field id="apiToken" type="textfield" default="">
 		<Label>API Token:</Label>
-		<Description>required. get api key here (https://pushover.net/api).</Description>
+	</Field>
+	<Field id="hlpApiToken" type="label" fontSize="small">
+		<Label>required. get api key here (https://pushover.net/api).</Label>
 	</Field>
 	<Field id="userKey" type="textfield" default="">
 		<Label>User Key:</Label>
-		<Description>required. info about user key (https://pushover.net/faq#overview-what).</Description>
 	</Field>
+	<Field id="hlpUserKey" type="label" fontSize="small">
+		<Label>required. info about user key (https://pushover.net/faq#overview-what).</Label>
+	</Field>
+	<SupportURL>https://github.com/discgolfer1138/indigo-pushover/issues</SupportURL>
 </PluginConfig>

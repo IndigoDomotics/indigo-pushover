@@ -6,11 +6,15 @@
 		<ConfigUI>
 			<Field id="msgTitle" type="textfield" default="">
 				<Label>Title:</Label>
-				<Description>this is your message's title. if left blank, your app's name is used. note: it can contain variables.</Description>
+			</Field>
+			<Field id="hlpMsgTitle" type="label" fontSize="small">
+				<Label>this is your message's title. if left blank, your app's name is used. note: it can contain variables.</Label>
 			</Field>
 			<Field id="msgBody" type="textfield" default="">
 				<Label>Message:</Label>
-				<Description>this is the body of your message. note: it can contain variables.</Description>
+			</Field>
+			<Field id="hlpMsgBody" type="label" fontSize="small">
+				<Label>this is the body of your message. note: it can contain variables.</Label>
 			</Field>
 			<Field id="separator0" type="separator"/>
 			<Field id="msgSound" type="menu" defaultValue="pushover">
@@ -39,7 +43,9 @@
 					<Option value="updown">Up Down (long)</Option>
 					<Option value="none">None (silent)</Option>
 				</List>
-				<Description>optional. select one of the sounds supported by device clients to override the user's default sound choice.</Description>
+			</Field>
+			<Field id="hlpMsgSound" type="label" fontSize="small">
+				<Label>optional. select one of the sounds supported by device clients to override the user's default sound choice.</Label>
 			</Field>
 			<Field id="msgPriority" type="menu" defaultValue="0">
 				<Label>Priority:</Label>
@@ -50,21 +56,28 @@
 					<Option value="1">high priority</Option>
 					<Option value="2">require confirmation</Option>
 				</List>
-				<Description>optional. set to determine priority level. note: setting to 'high priority' or above will override user's quiet hours</Description>
+			</Field>
+			<Field id="hlpMsgPriority" type="label" fontSize="small">
+				<Label>optional. set to determine priority level. note: setting to 'high priority' or above will override user's quiet hours</Label>
 			</Field>
 			<Field id="msgDevice" type="textfield" default="">
 				<Label>Device:</Label>
-				<Description>optional. only specified device will receive message. If left empty, all devices registered to your user key will receive message.</Description>
+			</Field>
+			<Field id="hlpMsgDevice" type="label" fontSize="small">
+				<Label>optional. only specified device will receive message. If empty, all your devices will receive message.</Label>
 			</Field>
 			<Field id="msgSupLinkUrl" type="textfield" default="">
 				<Label>Supplemental Link URL:</Label>
-				<Description>optional. a supplementary URL to show with your message.</Description>
+			</Field>
+			<Field id="hlpMsgSupLinkUrl" type="label" fontSize="small">
+				<Label>optional. a supplementary URL to show with your message.</Label>
 			</Field>
 			<Field id="msgSupLinkTitle" type="textfield" default="">
 				<Label>Supplemental Link Title:</Label>
-				<Description>optional. a title for your supplementary URL, otherwise just the URL is shown.</Description>
 			</Field>
-			<Field id="separator1" type="separator"/>
+			<Field id="hlpMsgSupLinkTitle" type="label" fontSize="small">
+				<Label>optional. a title for your supplementary URL, otherwise just the URL is shown.</Label>
+			</Field>
 			<SupportURL>https://github.com/discgolfer1138/indigo-pushover/issues</SupportURL>
 		</ConfigUI>
 	</Action>
