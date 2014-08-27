@@ -15,4 +15,13 @@ indigo-pushover
 2. Follow [standard plugin installation process](http://bit.ly/1e1Vc7b)
 
 ### Actions Supported
-* Send Push Notification (subject and message are configurable)
+* Send Push Notification
+** customize title, message (supports variables)
+** limit to just one specific device (optional)
+** override notification sound
+** set message priority
+** configure supplemental link and title
+
+## Multiple Applications
+if you need to be able to support multiple applications, simply create additional instances of the plugin for each.
+

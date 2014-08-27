@@ -4,15 +4,68 @@
 		<Name>Send Push Notification</Name>
 		<CallbackMethod>send</CallbackMethod>
 		<ConfigUI>
-			<SupportURL>https://github.com/discgolfer1138/indigo-pushover/issues</SupportURL>
-			<Field id="txttitle" type="textfield" default="">
-				<Label>Subject:</Label>
-				<Description>message title goes here</Description>
+			<Field id="msgTitle" type="textfield" default="">
+				<Label>Title:</Label>
+				<Description>this is your message's title. if left blank, your app's name is used. note: it can contain variables.</Description>
 			</Field>
-			<Field id="txtmessage" type="textfield" default="">
+			<Field id="msgBody" type="textfield" default="">
 				<Label>Message:</Label>
-				<Description>message body goes here</Description>
+				<Description>this is the body of your message. note: it can contain variables.</Description>
 			</Field>
+			<Field id="separator0" type="separator"/>
+			<Field id="msgSound" type="menu" defaultValue="pushover">
+				<Label>Sound:</Label>
+				<List>
+					<Option value="pushover">Pushover (default)</Option>
+					<Option value="bike">Bike</Option>
+					<Option value="bugle">Bugle</Option>
+					<Option value="cashregister">Cash Register</Option>
+					<Option value="classical">Classical</Option>
+					<Option value="cosmic">Cosmic</Option>
+					<Option value="falling">Falling</Option>
+					<Option value="gamelan">Gamelan</Option>
+					<Option value="incoming">Incoming</Option>
+					<Option value="intermission">Intermission</Option>
+					<Option value="magic">Magic</Option>
+					<Option value="mechanical">Mechanical</Option>
+					<Option value="pianobar">Piano Bar</Option>
+					<Option value="siren">Siren</Option>
+					<Option value="spacealarm">Space Alarm</Option>
+					<Option value="tugboat">Tug Boat</Option>
+					<Option value="alien">Alien Alarm (long)</Option>
+					<Option value="climb">Climb (long)</Option>
+					<Option value="persistent">Persistent (long)</Option>
+					<Option value="echo">Pushover Echo (long)</Option>
+					<Option value="updown">Up Down (long)</Option>
+					<Option value="none">None (silent)</Option>
+				</List>
+				<Description>optional. select one of the sounds supported by device clients to override the user's default sound choice.</Description>
+			</Field>
+			<Field id="msgPriority" type="menu" defaultValue="0">
+				<Label>Priority:</Label>
+				<List>
+					<Option value="-2">no notification/alert</Option>
+					<Option value="-1">silent notification</Option>
+					<Option value="0">normal (default)</Option>
+					<Option value="1">high priority</Option>
+					<Option value="2">require confirmation</Option>
+				</List>
+				<Description>optional. set to determine priority level. note: setting to 'high priority' or above will override user's quiet hours</Description>
+			</Field>
+			<Field id="msgDevice" type="textfield" default="">
+				<Label>Device:</Label>
+				<Description>optional. only specified device will receive message. If left empty, all devices registered to your user key will receive message.</Description>
+			</Field>
+			<Field id="msgSupLinkUrl" type="textfield" default="">
+				<Label>Supplemental Link URL:</Label>
+				<Description>optional. a supplementary URL to show with your message.</Description>
+			</Field>
+			<Field id="msgSupLinkTitle" type="textfield" default="">
+				<Label>Supplemental Link Title:</Label>
+				<Description>optional. a title for your supplementary URL, otherwise just the URL is shown.</Description>
+			</Field>
+			<Field id="separator1" type="separator"/>
+			<SupportURL>https://github.com/discgolfer1138/indigo-pushover/issues</SupportURL>
 		</ConfigUI>
 	</Action>
 </Actions>
