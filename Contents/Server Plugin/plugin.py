@@ -20,7 +20,7 @@ class Plugin(indigo.PluginBase):
 		self.debugLog(u"shutdown called")
 
 	# helper functions
-	def prepareTextValue(strInput):
+	def prepareTextValue(self, strInput):
 
 		if strInput is None:
 			return strInput
@@ -30,7 +30,10 @@ class Plugin(indigo.PluginBase):
 			while "%%v:" in strInput:
 				strInput = self.substituteVariable(strInput)
 
-			#todo: encode special characters
+			self.debugLog(strInput)
+
+			#fix issue with special characters
+			strInput = strInput.encode('utf8')
 
 			return strInput
 
@@ -40,7 +43,7 @@ class Plugin(indigo.PluginBase):
 		#fill params dictionary with required values
 		params = {
 			'token': self.pluginPrefs['apiToken'].strip(),
-			'user': self.pluginPrefs['userkey'].strip(),
+			'user': self.pluginPrefs['userKey'].strip(),
 			'title': self.prepareTextValue(pluginAction.props['msgTitle']),
 			'message': self.prepareTextValue(pluginAction.props['msgBody'])
 		}
@@ -65,6 +68,6 @@ class Plugin(indigo.PluginBase):
 		conn.request(
 			"POST",
 			"/1/messages",
-			urllib.urlencode(msgParams),
+			urllib.urlencode(params),
 			{ "Content-type": "application/x-www-form-urlencoded" }
 		)
