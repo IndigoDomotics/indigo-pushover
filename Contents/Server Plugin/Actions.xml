@@ -7,13 +7,13 @@
 			<Field id="msgTitle" type="textfield" default="">
 				<Label>Title:</Label>
 			</Field>
-			<Field id="hlpMsgTitle" type="label" fontSize="small">
+			<Field id="hlpMsgTitle" type="label" fontSize="mini" alignWithControl="true">
 				<Label>this is your message's title. if left blank, your app's name is used. note: it can contain variables.</Label>
 			</Field>
 			<Field id="msgBody" type="textfield" default="">
 				<Label>Message:</Label>
 			</Field>
-			<Field id="hlpMsgBody" type="label" fontSize="small">
+			<Field id="hlpMsgBody" type="label" fontSize="mini" alignWithControl="true">
 				<Label>this is the body of your message. note: it can contain variables.</Label>
 			</Field>
 			<Field id="separator0" type="separator"/>
@@ -44,7 +44,7 @@
 					<Option value="none">None (silent)</Option>
 				</List>
 			</Field>
-			<Field id="hlpMsgSound" type="label" fontSize="small">
+			<Field id="hlpMsgSound" type="label" fontSize="mini" alignWithControl="true">
 				<Label>optional. select one of the sounds supported by device clients to override the user's default sound choice.</Label>
 			</Field>
 			<Field id="msgPriority" type="menu" defaultValue="0">
@@ -57,25 +57,25 @@
 					<Option value="2">require confirmation</Option>
 				</List>
 			</Field>
-			<Field id="hlpMsgPriority" type="label" fontSize="small">
+			<Field id="hlpMsgPriority" type="label" fontSize="mini" alignWithControl="true">
 				<Label>optional. set to determine priority level. note: setting to 'high priority' or above will override user's quiet hours</Label>
 			</Field>
 			<Field id="msgDevice" type="textfield" default="">
 				<Label>Device:</Label>
 			</Field>
-			<Field id="hlpMsgDevice" type="label" fontSize="small">
+			<Field id="hlpMsgDevice" type="label" fontSize="mini" alignWithControl="true">
 				<Label>optional. only specified device will receive message. If empty, all your devices will receive message.</Label>
 			</Field>
 			<Field id="msgSupLinkUrl" type="textfield" default="">
 				<Label>Supplemental Link URL:</Label>
 			</Field>
-			<Field id="hlpMsgSupLinkUrl" type="label" fontSize="small">
+			<Field id="hlpMsgSupLinkUrl" type="label" fontSize="mini" alignWithControl="true">
 				<Label>optional. a supplementary URL to show with your message.</Label>
 			</Field>
 			<Field id="msgSupLinkTitle" type="textfield" default="">
 				<Label>Supplemental Link Title:</Label>
 			</Field>
-			<Field id="hlpMsgSupLinkTitle" type="label" fontSize="small">
+			<Field id="hlpMsgSupLinkTitle" type="label" fontSize="mini" alignWithControl="true">
 				<Label>optional. a title for your supplementary URL, otherwise just the URL is shown.</Label>
 			</Field>
 			<SupportURL>https://github.com/discgolfer1138/indigo-pushover/issues</SupportURL>
