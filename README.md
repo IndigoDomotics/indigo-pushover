@@ -22,6 +22,3 @@ indigo-pushover
 	* set message priority
 	* configure supplemental link and title
 
-## Multiple Applications
-if you need to be able to support multiple applications, simply create additional instances of the plugin for each.
-
