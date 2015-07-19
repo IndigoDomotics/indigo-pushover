@@ -71,3 +71,4 @@ class Plugin(indigo.PluginBase):
 			urllib.urlencode(params),
 			{ "Content-type": "application/x-www-form-urlencoded" }
 		)
+		conn.close()
