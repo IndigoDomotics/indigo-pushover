@@ -12,5 +12,5 @@
 	<Field id="hlpUserKey" type="label" fontSize="mini" alignWithControl="true">
 		<Label>required. info about user key (https://pushover.net/faq#overview-what).</Label>
 	</Field>
-	<SupportURL>https://github.com/discgolfer1138/indigo-pushover/issues</SupportURL>
+	<SupportURL>https://github.com/IndigoDomotics/indigo-pushover/issues</SupportURL>
 </PluginConfig>
