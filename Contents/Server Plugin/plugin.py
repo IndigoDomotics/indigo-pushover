@@ -27,8 +27,7 @@ class Plugin(indigo.PluginBase):
 		else:
 			strInput = strInput.strip()
 
-			while "%%v:" in strInput:
-				strInput = self.substituteVariable(strInput)
+			strInput = self.substitute(strInput)
 
 			self.debugLog(strInput)
 
@@ -63,7 +62,7 @@ class Plugin(indigo.PluginBase):
 
 		if pluginAction.props['msgPriority'] is not None:
 			params['priority'] = pluginAction.props['msgPriority']
-		
+
 		conn = httplib.HTTPSConnection("api.pushover.net:443")
 		conn.request(
 			"POST",
