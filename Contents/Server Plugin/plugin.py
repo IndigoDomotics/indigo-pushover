@@ -12,7 +12,6 @@ class Plugin(indigo.PluginBase):
 	def __del__(self):
 		indigo.PluginBase.__del__(self)
 
-
 	def startup(self):
 		self.debugLog(u"startup called")
 
@@ -62,12 +61,16 @@ class Plugin(indigo.PluginBase):
 
 		if pluginAction.props['msgPriority'] is not None:
 			params['priority'] = pluginAction.props['msgPriority']
+			if params['priority'] == 2 or params['priority'] == "2":
+				# Require Confirmation priority requires 2 additional params:
+				params['retry'] = "600"		# show every 10 minutes until confirmted (could expose UI for this...)
+				params['expire'] = "86400"	# set expire to maximum (24 hours)
 
 		conn = httplib.HTTPSConnection("api.pushover.net:443")
 		conn.request(
 			"POST",
 			"/1/messages",
 			urllib.urlencode(params),
-			{ "Content-type": "application/x-www-form-urlencoded" }
+			{"Content-type": "application/x-www-form-urlencoded"}
 		)
 		conn.close()
