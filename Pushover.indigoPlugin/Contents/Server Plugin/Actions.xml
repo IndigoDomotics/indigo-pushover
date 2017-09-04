@@ -1,20 +1,20 @@
 <?xml version="1.0"?>
 <Actions>
-	<Action id="send">
-		<Name>Send Push Notification</Name>
+	<Action id="send" uiPath="NotificationActions">
+		<Name>Send Pushover Notification</Name>
 		<CallbackMethod>send</CallbackMethod>
 		<ConfigUI>
 			<Field id="msgTitle" type="textfield" default="">
 				<Label>Title:</Label>
 			</Field>
 			<Field id="hlpMsgTitle" type="label" fontSize="mini" alignWithControl="true">
-				<Label>this is your message's title. if left blank, your app's name is used. note: it can contain variables.</Label>
+				<Label>this is your message's title. if left blank, your app's name is used. note: it can contain variable (%%v:12345679%%) and device state (%%d:987654321:stateId%%) substitutions.</Label>
 			</Field>
 			<Field id="msgBody" type="textfield" default="">
 				<Label>Message:</Label>
 			</Field>
 			<Field id="hlpMsgBody" type="label" fontSize="mini" alignWithControl="true">
-				<Label>this is the body of your message. note: it can contain variables.</Label>
+				<Label>this is the body of your message. note: it can also contain variable and device state substitutions.</Label>
 			</Field>
 			<Field id="separator0" type="separator"/>
 			<Field id="msgSound" type="menu" defaultValue="pushover">
