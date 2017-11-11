@@ -3,23 +3,30 @@
 <plist version="1.0">
 <dict>
 	<key>PluginVersion</key>
-	<string>1.1.6</string>
+	<string>1.2.0</string>
 	<key>ServerApiVersion</key>
-	<string>1.0</string>
+	<string>2.0</string>
 	<key>IwsApiVersion</key>
 	<string>1.0.0</string>
 	<key>CFBundleDisplayName</key>
 	<string>Pushover</string>
 	<key>CFBundleIdentifier</key>
-	<string>io.thechad.indigoplugin.pushover</string>
+	<string>com.indigodomo.opensource.indigo-pushover</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.0</string>
+	<string>1.0.1</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>https://github.com/IndigoDomotics/indigo-pushover/</string>
+			<string>https://github.com/IndigoDomotics/indigo-pushover</string>
 		</dict>
 	</array>
+	<key>GithubInfo</key>
+	<dict>
+		<key>GithubRepo</key>
+		<string>indigo-pushover</string>
+		<key>GithubUser</key>
+		<string>IndigoDomotics</string>
+	</dict>
 </dict>
 </plist>
