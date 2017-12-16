@@ -4,7 +4,7 @@
 		<Label>API Token:</Label>
 	</Field>
 	<Field id="hlpApiToken" type="label" fontSize="mini" alignWithControl="true">
-		<Label>required. get api key here (https://pushover.net/api).</Label>
+		<Label>required. get api key here (https://pushover.net/apps/clone/indigo_domotics).</Label>
 	</Field>
 	<Field id="userKey" type="textfield" default="">
 		<Label>User Key:</Label>
