@@ -60,6 +60,12 @@
 			<Field id="hlpMsgPriority" type="label" fontSize="mini" alignWithControl="true">
 				<Label>optional. set to determine priority level. note: setting to 'high priority' or above will override user's quiet hours</Label>
 			</Field>
+			<Field id="msgUser" type="textfield" default="">
+				<Label>User:</Label>
+			</Field>
+			<Field id="hlpMsgUser" type="label" fontSize="mini" alignWithControl="true">
+				<Label>optional. can be used send to a different Pushover user or group key than what is configured in the plugin.</Label>
+			</Field>
 			<Field id="msgDevice" type="textfield" default="">
 				<Label>Device:</Label>
 			</Field>

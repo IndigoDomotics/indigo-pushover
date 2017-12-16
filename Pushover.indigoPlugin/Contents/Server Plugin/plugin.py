@@ -50,6 +50,9 @@ class Plugin(indigo.PluginBase):
 		if pluginAction.props['msgDevice'] is not None:
 			params['device'] = pluginAction.props['msgDevice'].strip()
 
+		if pluginAction.props['msgUser'] is not None:
+			params['user'] = pluginAction.props['msgUser'].strip()
+
 		if pluginAction.props['msgSound'] is not None:
 			params['sound'] = pluginAction.props["msgSound"].strip()
 
