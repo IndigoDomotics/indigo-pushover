@@ -18,6 +18,9 @@ class Plugin(indigo.PluginBase):
 	def shutdown(self):
 		self.debugLog(u"shutdown called")
 
+	def present(self, prop):
+		return (prop and prop.strip() != "")
+
 	# helper functions
 	def prepareTextValue(self, strInput):
 
@@ -47,22 +50,22 @@ class Plugin(indigo.PluginBase):
 		}
 
 		#populate optional parameters
-		if pluginAction.props['msgDevice'] is not None:
+		if self.present(pluginAction.props['msgDevice']):
 			params['device'] = pluginAction.props['msgDevice'].strip()
 
-		if pluginAction.props['msgUser'] is not None:
+		if self.present(pluginAction.props['msgUser']):
 			params['user'] = pluginAction.props['msgUser'].strip()
 
-		if pluginAction.props['msgSound'] is not None:
+		if self.present(pluginAction.props['msgSound']):
 			params['sound'] = pluginAction.props["msgSound"].strip()
 
-		if pluginAction.props['msgSupLinkTitle'] is not None:
+		if self.present(pluginAction.props['msgSupLinkTitle']):
 			params['url_title'] = self.prepareTextValue(pluginAction.props['msgSupLinkTitle'])
 
-		if pluginAction.props['msgSupLinkUrl'] is not None:
+		if self.present(pluginAction.props['msgSupLinkUrl']):
 			params['url'] = self.prepareTextValue(pluginAction.props['msgSupLinkUrl'])
 
-		if pluginAction.props['msgPriority'] is not None:
+		if self.present(pluginAction.props['msgPriority']):
 			params['priority'] = pluginAction.props['msgPriority']
 			if params['priority'] == 2 or params['priority'] == "2":
 				# Require Confirmation priority requires 2 additional params:
@@ -72,8 +75,9 @@ class Plugin(indigo.PluginBase):
 		conn = httplib.HTTPSConnection("api.pushover.net:443")
 		conn.request(
 			"POST",
-			"/1/messages",
+			"/1/messages.json",
 			urllib.urlencode(params),
 			{"Content-type": "application/x-www-form-urlencoded"}
 		)
+		self.debugLog(u"Result: %s" % conn.getresponse().read())
 		conn.close()
