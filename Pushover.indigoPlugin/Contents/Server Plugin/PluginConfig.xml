@@ -4,13 +4,13 @@
 		<Label>API Token:</Label>
 	</Field>
 	<Field id="hlpApiToken" type="label" fontSize="mini" alignWithControl="true">
-		<Label>required. get api key here (https://pushover.net/apps/clone/indigo_domotics).</Label>
+		<Label>Required, can be created at https://pushover.net/apps/clone/indigo_domotics</Label>
 	</Field>
 	<Field id="userKey" type="textfield" default="">
 		<Label>User Key:</Label>
 	</Field>
 	<Field id="hlpUserKey" type="label" fontSize="mini" alignWithControl="true">
-		<Label>required. info about user key (https://pushover.net/faq#overview-what).</Label>
+		<Label>Required, can be found at https://pushover.net/dashboard</Label>
 	</Field>
 	<SupportURL>https://github.com/IndigoDomotics/indigo-pushover/issues</SupportURL>
 </PluginConfig>
