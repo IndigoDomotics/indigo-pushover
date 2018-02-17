@@ -18,6 +18,16 @@ class Plugin(indigo.PluginBase):
 	def shutdown(self):
 		self.debugLog(u"shutdown called")
 
+	def validateActionConfigUi(self, valuesDict, typeId, deviceId):
+		errorDict = indigo.Dict()
+
+		if typeId == "send":
+			if not self.present(valuesDict.get("msgBody")):
+				errorDict["msgBody"] = "Cannot be blank"
+				return (False, valuesDict, errorDict)
+
+		return (True, valuesDict, errorDict)
+
 	def present(self, prop):
 		return (prop and prop.strip() != "")
 
