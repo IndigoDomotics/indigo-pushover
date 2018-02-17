@@ -45,11 +45,13 @@ class Plugin(indigo.PluginBase):
 		params = {
 			'token': self.pluginPrefs['apiToken'].strip(),
 			'user': self.pluginPrefs['userKey'].strip(),
-			'title': self.prepareTextValue(pluginAction.props['msgTitle']),
 			'message': self.prepareTextValue(pluginAction.props['msgBody'])
 		}
 
 		#populate optional parameters
+		if self.present(pluginAction.props.get('msgTitle')):
+			params['title'] = self.prepareTextValue(pluginAction.props['msgTitle']).strip()
+
 		if self.present(pluginAction.props.get('msgDevice')):
 			params['device'] = pluginAction.props['msgDevice'].strip()
 
