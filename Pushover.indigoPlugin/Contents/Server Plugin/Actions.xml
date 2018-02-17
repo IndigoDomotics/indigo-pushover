@@ -60,6 +60,12 @@
 			<Field id="hlpMsgPriority" type="label" fontSize="mini" alignWithControl="true">
 				<Label>optional. set to determine priority level. note: setting to 'high priority' or above will override user's quiet hours</Label>
 			</Field>
+			<Field id="msgTags" type="textfield" default="">
+				<Label>Message Tags:</Label>
+			</Field>
+			<Field id="hlpMsgTags" type="label" fontSize="mini" alignWithControl="true">
+				<Label>(Optional) Comma-separated, only used by Emergency-priority notifications and can be used later by Cancel action to cancel retries of this message</Label>
+			</Field>
 			<Field id="msgUser" type="textfield" default="">
 				<Label>User:</Label>
 			</Field>
@@ -83,6 +89,19 @@
 			</Field>
 			<Field id="hlpMsgSupLinkTitle" type="label" fontSize="mini" alignWithControl="true">
 				<Label>optional. a title for your supplementary URL, otherwise just the URL is shown.</Label>
+			</Field>
+			<SupportURL>https://github.com/IndigoDomotics/indigo-pushover/issues</SupportURL>
+		</ConfigUI>
+	</Action>
+	<Action id="cancel" uiPath="NotificationActions">
+		<Name>Cancel Pushover Emergency-Priority Notification</Name>
+		<CallbackMethod>cancel</CallbackMethod>
+		<ConfigUI>
+			<Field id="cancelTag" type="textfield" default="">
+				<Label>Tag:</Label>
+			</Field>
+			<Field id="hlpCancelTag" type="label" fontSize="mini" alignWithControl="true">
+				<Label>Tag that was sent by a notification action with emergency priority, will cancel retries for all notifications with this tag</Label>
 			</Field>
 			<SupportURL>https://github.com/IndigoDomotics/indigo-pushover/issues</SupportURL>
 		</ConfigUI>
