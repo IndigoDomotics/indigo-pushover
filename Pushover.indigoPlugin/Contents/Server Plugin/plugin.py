@@ -50,22 +50,22 @@ class Plugin(indigo.PluginBase):
 		}
 
 		#populate optional parameters
-		if self.present(pluginAction.props['msgDevice']):
+		if self.present(pluginAction.props.get('msgDevice')):
 			params['device'] = pluginAction.props['msgDevice'].strip()
 
-		if self.present(pluginAction.props['msgUser']):
+		if self.present(pluginAction.props.get('msgUser')):
 			params['user'] = pluginAction.props['msgUser'].strip()
 
-		if self.present(pluginAction.props['msgSound']):
+		if self.present(pluginAction.props.get('msgSound')):
 			params['sound'] = pluginAction.props["msgSound"].strip()
 
-		if self.present(pluginAction.props['msgSupLinkTitle']):
+		if self.present(pluginAction.props.get('msgSupLinkTitle')):
 			params['url_title'] = self.prepareTextValue(pluginAction.props['msgSupLinkTitle'])
 
-		if self.present(pluginAction.props['msgSupLinkUrl']):
+		if self.present(pluginAction.props.get('msgSupLinkUrl')):
 			params['url'] = self.prepareTextValue(pluginAction.props['msgSupLinkUrl'])
 
-		if self.present(pluginAction.props['msgPriority']):
+		if self.present(pluginAction.props.get('msgPriority')):
 			params['priority'] = pluginAction.props['msgPriority']
 			if params['priority'] == 2 or params['priority'] == "2":
 				# Require Confirmation priority requires 2 additional params:
