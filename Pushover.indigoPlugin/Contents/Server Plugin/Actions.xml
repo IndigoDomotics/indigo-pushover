@@ -90,6 +90,12 @@
 			<Field id="hlpMsgSupLinkTitle" type="label" fontSize="mini" alignWithControl="true">
 				<Label>optional. a title for your supplementary URL, otherwise just the URL is shown.</Label>
 			</Field>
+			<Field id="msgAttachment" type="textfield" default="">
+				<Label>Attachment:</Label>
+			</Field>
+			<Field id="hlpAttachment" type="label" fontSize="mini" alignWithControl="true">
+				<Label>optional. a full path to an attachment file (jpg image).  Must be less than 2.5mb.</Label>
+			</Field>
 			<SupportURL>https://github.com/IndigoDomotics/indigo-pushover/issues</SupportURL>
 		</ConfigUI>
 	</Action>

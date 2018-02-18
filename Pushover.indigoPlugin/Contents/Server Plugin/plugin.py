@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import httplib, urllib, sys, os
+import httplib, urllib, sys, os, requests
 
 class Plugin(indigo.PluginBase):
 
@@ -91,15 +91,21 @@ class Plugin(indigo.PluginBase):
 				if self.present(pluginAction.props.get('msgTags')):
 					params['tags'] = self.prepareTextValue(pluginAction.props['msgTags'])
 
-		conn = httplib.HTTPSConnection("api.pushover.net:443")
-		conn.request(
-			"POST",
-			"/1/messages.json",
-			urllib.urlencode(params),
-			{"Content-type": "application/x-www-form-urlencoded"}
-		)
-		self.debugLog(u"Result: %s" % conn.getresponse().read())
-		conn.close()
+		if self.present(pluginAction.props.get('msgAttachment')):
+			r = requests.post("https://api.pushover.net/1/messages.json", data = params,
+			files = {
+				"attachment": (self.prepareTextValue(pluginAction.props['msgAttachment']), open(self.prepareTextValue(pluginAction.props['msgAttachment']), "rb"), "image/jpeg")
+			})
+		else:
+			conn = httplib.HTTPSConnection("api.pushover.net:443")
+			conn.request(
+				"POST",
+				"/1/messages.json",
+				urllib.urlencode(params),
+				{"Content-type": "application/x-www-form-urlencoded"}
+			)
+			self.debugLog(u"Result: %s" % conn.getresponse().read())
+			conn.close()
 
 	def cancel(self, pluginAction):
 		params = {
