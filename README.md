@@ -22,3 +22,5 @@ indigo-pushover
 	* set message priority
 	* configure supplemental link and title
 
+* Cancel Pushover Emergency-Priority Notification
+	* tag (included in previous emergency notifications - will cancel all retries with that tag)
