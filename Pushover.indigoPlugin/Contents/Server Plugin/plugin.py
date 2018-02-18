@@ -25,6 +25,10 @@ class Plugin(indigo.PluginBase):
 			if not self.present(valuesDict.get("msgBody")):
 				errorDict["msgBody"] = "Cannot be blank"
 				return (False, valuesDict, errorDict)
+		elif typeId == "cancel":
+			if not self.present(valuesDict.get("cancelTag")):
+				errorDict["cancelTag"] = "Cannot be blank"
+				return (False, valuesDict, errorDict)
 
 		return (True, valuesDict, errorDict)
 
@@ -84,10 +88,28 @@ class Plugin(indigo.PluginBase):
 				params['retry'] = "600"		# show every 10 minutes until confirmted (could expose UI for this...)
 				params['expire'] = "86400"	# set expire to maximum (24 hours)
 
+				if self.present(pluginAction.props.get('msgTags')):
+					params['tags'] = self.prepareTextValue(pluginAction.props['msgTags'])
+
 		conn = httplib.HTTPSConnection("api.pushover.net:443")
 		conn.request(
 			"POST",
 			"/1/messages.json",
+			urllib.urlencode(params),
+			{"Content-type": "application/x-www-form-urlencoded"}
+		)
+		self.debugLog(u"Result: %s" % conn.getresponse().read())
+		conn.close()
+
+	def cancel(self, pluginAction):
+		params = {
+			'token': self.pluginPrefs['apiToken'].strip(),
+		}
+
+		conn = httplib.HTTPSConnection("api.pushover.net:443")
+		conn.request(
+			"POST",
+			"/1/receipts/cancel_by_tag/" + pluginAction.props['cancelTag'] + ".json",
 			urllib.urlencode(params),
 			{"Content-type": "application/x-www-form-urlencoded"}
 		)
