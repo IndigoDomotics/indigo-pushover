@@ -62,6 +62,8 @@ class Plugin(indigo.PluginBase):
 			'message': self.prepareTextValue(pluginAction.props['msgBody'])
 		}
 
+		attachment = {}
+
 		#populate optional parameters
 		if self.present(pluginAction.props.get('msgTitle')):
 			params['title'] = self.prepareTextValue(pluginAction.props['msgTitle']).strip()
@@ -81,6 +83,11 @@ class Plugin(indigo.PluginBase):
 		if self.present(pluginAction.props.get('msgSupLinkUrl')):
 			params['url'] = self.prepareTextValue(pluginAction.props['msgSupLinkUrl'])
 
+		if self.present(pluginAction.props.get('msgAttachment')):
+			attachment = {
+				"attachment": (self.prepareTextValue(pluginAction.props['msgAttachment']), open(self.prepareTextValue(pluginAction.props['msgAttachment']), "rb"), "image/jpeg")
+		}
+
 		if self.present(pluginAction.props.get('msgPriority')):
 			params['priority'] = pluginAction.props['msgPriority']
 			if params['priority'] == 2 or params['priority'] == "2":
@@ -91,21 +98,9 @@ class Plugin(indigo.PluginBase):
 				if self.present(pluginAction.props.get('msgTags')):
 					params['tags'] = self.prepareTextValue(pluginAction.props['msgTags'])
 
-		if self.present(pluginAction.props.get('msgAttachment')):
-			r = requests.post("https://api.pushover.net/1/messages.json", data = params,
-			files = {
-				"attachment": (self.prepareTextValue(pluginAction.props['msgAttachment']), open(self.prepareTextValue(pluginAction.props['msgAttachment']), "rb"), "image/jpeg")
-			})
-		else:
-			conn = httplib.HTTPSConnection("api.pushover.net:443")
-			conn.request(
-				"POST",
-				"/1/messages.json",
-				urllib.urlencode(params),
-				{"Content-type": "application/x-www-form-urlencoded"}
-			)
-			self.debugLog(u"Result: %s" % conn.getresponse().read())
-			conn.close()
+		r = requests.post("https://api.pushover.net/1/messages.json", data = params, files = attachment)
+
+		self.debugLog(u"Result: %s" % r.text)
 
 	def cancel(self, pluginAction):
 		params = {

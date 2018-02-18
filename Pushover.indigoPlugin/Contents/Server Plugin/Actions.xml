@@ -94,7 +94,7 @@
 				<Label>Attachment:</Label>
 			</Field>
 			<Field id="hlpAttachment" type="label" fontSize="mini" alignWithControl="true">
-				<Label>optional. a full path to an attachment file (jpg image).  Must be less than 2.5mb.</Label>
+				<Label>optional. a full path to an attachment file (jpg image).  Must be less than 2.5mb.  Variables are accepted (%%v:12345679%%).</Label>
 			</Field>
 			<SupportURL>https://github.com/IndigoDomotics/indigo-pushover/issues</SupportURL>
 		</ConfigUI>
