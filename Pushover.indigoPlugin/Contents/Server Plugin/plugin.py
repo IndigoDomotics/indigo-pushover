@@ -84,7 +84,7 @@ class Plugin(indigo.PluginBase):
 			params['url'] = self.prepareTextValue(pluginAction.props['msgSupLinkUrl'])
 
 		if self.present(pluginAction.props.get('msgAttachment')):
-			if os.path.isfile(self.prepareTextValue(pluginAction.props['msgAttachment'])) and self.prepareTextValue(pluginAction.props['msgAttachment']).lower().endswith(('.png', '.jpg', '.jpeg')):
+			if os.path.isfile(self.prepareTextValue(pluginAction.props['msgAttachment'])) and self.prepareTextValue(pluginAction.props['msgAttachment']).lower().endswith(('.jpg', '.jpeg')):
 				if os.path.getsize(self.prepareTextValue(pluginAction.props['msgAttachment'])) <= 2621440:
 					attachment = {
 						"attachment": (self.prepareTextValue(pluginAction.props['msgAttachment']), open(self.prepareTextValue(pluginAction.props['msgAttachment']), "rb"), "image/jpeg")
