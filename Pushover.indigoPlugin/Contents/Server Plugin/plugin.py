@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import httplib, urllib, sys, os
+import httplib, urllib, sys, os, requests
 
 class Plugin(indigo.PluginBase):
 
@@ -62,6 +62,8 @@ class Plugin(indigo.PluginBase):
 			'message': self.prepareTextValue(pluginAction.props['msgBody'])
 		}
 
+		attachment = {}
+
 		#populate optional parameters
 		if self.present(pluginAction.props.get('msgTitle')):
 			params['title'] = self.prepareTextValue(pluginAction.props['msgTitle']).strip()
@@ -81,6 +83,18 @@ class Plugin(indigo.PluginBase):
 		if self.present(pluginAction.props.get('msgSupLinkUrl')):
 			params['url'] = self.prepareTextValue(pluginAction.props['msgSupLinkUrl'])
 
+		if self.present(pluginAction.props.get('msgAttachment')):
+			attachFile = self.prepareTextValue(pluginAction.props['msgAttachment'])
+			if os.path.isfile(attachFile) and attachFile.lower().endswith(('.jpg', '.jpeg')):
+				if os.path.getsize(attachFile) <= 2621440:
+					attachment = {
+						"attachment": (attachFile, open(attachFile, "rb"), "image/jpeg")
+					}
+				else:
+					self.debugLog(u"Warning: attached file size was too large, attachment was skipped")
+			else:
+				self.debugLog(u"Warning: file does not exist, or is not a jpeg file, attachment was skipped")
+
 		if self.present(pluginAction.props.get('msgPriority')):
 			params['priority'] = pluginAction.props['msgPriority']
 			if params['priority'] == 2 or params['priority'] == "2":
@@ -91,15 +105,9 @@ class Plugin(indigo.PluginBase):
 				if self.present(pluginAction.props.get('msgTags')):
 					params['tags'] = self.prepareTextValue(pluginAction.props['msgTags'])
 
-		conn = httplib.HTTPSConnection("api.pushover.net:443")
-		conn.request(
-			"POST",
-			"/1/messages.json",
-			urllib.urlencode(params),
-			{"Content-type": "application/x-www-form-urlencoded"}
-		)
-		self.debugLog(u"Result: %s" % conn.getresponse().read())
-		conn.close()
+		r = requests.post("https://api.pushover.net/1/messages.json", data = params, files = attachment)
+
+		self.debugLog(u"Result: %s" % r.text)
 
 	def cancel(self, pluginAction):
 		params = {

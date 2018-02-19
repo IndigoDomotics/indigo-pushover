@@ -21,6 +21,7 @@ indigo-pushover
 	* override notification sound
 	* set message priority
 	* configure supplemental link and title
+	* attach images (jpeg only, must be less than 2.5mb, supports variables)
 
 * Cancel Pushover Emergency-Priority Notification
 	* tag (included in previous emergency notifications - will cancel all retries with that tag)
