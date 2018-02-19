@@ -8,13 +8,13 @@
 				<Label>Title:</Label>
 			</Field>
 			<Field id="hlpMsgTitle" type="label" fontSize="mini" alignWithControl="true">
-				<Label>this is your message's title. if left blank, your app's name is used. note: it can contain variable (%%v:12345679%%) and device state (%%d:987654321:stateId%%) substitutions.</Label>
+				<Label>If left blank, your app's name is used; can contain variable (%%v:12345679%%) and device state (%%d:987654321:stateId%%) substitutions</Label>
 			</Field>
 			<Field id="msgBody" type="textfield" default="">
 				<Label>Message:</Label>
 			</Field>
 			<Field id="hlpMsgBody" type="label" fontSize="mini" alignWithControl="true">
-				<Label>this is the body of your message. note: it can also contain variable and device state substitutions.</Label>
+				<Label>Required, can also contain variable and device state substitutions</Label>
 			</Field>
 			<Field id="separator0" type="separator"/>
 			<Field id="msgSound" type="menu" defaultValue="pushover">
@@ -45,20 +45,20 @@
 				</List>
 			</Field>
 			<Field id="hlpMsgSound" type="label" fontSize="mini" alignWithControl="true">
-				<Label>optional. select one of the sounds supported by device clients to override the user's default sound choice.</Label>
+				<Label>(Optional) Sound to play on each device instead of device's default sound</Label>
 			</Field>
 			<Field id="msgPriority" type="menu" defaultValue="0">
 				<Label>Priority:</Label>
 				<List>
-					<Option value="-2">no notification/alert</Option>
-					<Option value="-1">silent notification</Option>
-					<Option value="0">normal (default)</Option>
-					<Option value="1">high priority</Option>
-					<Option value="2">require confirmation</Option>
+					<Option value="-2">-2 (No notification/alert)</Option>
+					<Option value="-1">-1 (Silent notification)</Option>
+					<Option value="0">0 (Normal/default)</Option>
+					<Option value="1">1 (High priority)</Option>
+					<Option value="2">2 (Emergency, require acknowledgement)</Option>
 				</List>
 			</Field>
 			<Field id="hlpMsgPriority" type="label" fontSize="mini" alignWithControl="true">
-				<Label>optional. set to determine priority level. note: setting to 'high priority' or above will override user's quiet hours</Label>
+				<Label>(Optional) Note: setting to 'High priority' or above will override your Quiet Hours</Label>
 			</Field>
 			<Field id="msgTags" type="textfield" default="">
 				<Label>Message Tags:</Label>
@@ -67,28 +67,28 @@
 				<Label>(Optional) Comma-separated, only used by Emergency-priority notifications and can be used later by Cancel action to cancel retries of this message</Label>
 			</Field>
 			<Field id="msgUser" type="textfield" default="">
-				<Label>User:</Label>
+				<Label>User Key:</Label>
 			</Field>
 			<Field id="hlpMsgUser" type="label" fontSize="mini" alignWithControl="true">
-				<Label>optional. can be used send to a different Pushover user or group key than what is configured in the plugin.</Label>
+				<Label>(Optional) Can be used send to a Pushover user or group key other than what is configured in the plugin</Label>
 			</Field>
 			<Field id="msgDevice" type="textfield" default="">
 				<Label>Device:</Label>
 			</Field>
 			<Field id="hlpMsgDevice" type="label" fontSize="mini" alignWithControl="true">
-				<Label>optional. only specified device will receive message. If empty, all your devices will receive message.</Label>
+				<Label>(Optional) Only send to specified devices (separated by commas) instead of all devices when left blank</Label>
 			</Field>
 			<Field id="msgSupLinkUrl" type="textfield" default="">
-				<Label>Supplemental Link URL:</Label>
+				<Label>Link URL:</Label>
 			</Field>
 			<Field id="hlpMsgSupLinkUrl" type="label" fontSize="mini" alignWithControl="true">
-				<Label>optional. a supplementary URL to show with your message.</Label>
+				<Label>(Optional) A supplementary URL to show with your message</Label>
 			</Field>
 			<Field id="msgSupLinkTitle" type="textfield" default="">
-				<Label>Supplemental Link Title:</Label>
+				<Label>Link Title:</Label>
 			</Field>
 			<Field id="hlpMsgSupLinkTitle" type="label" fontSize="mini" alignWithControl="true">
-				<Label>optional. a title for your supplementary URL, otherwise just the URL is shown.</Label>
+				<Label>(Optional) Title for supplementary URL, otherwise just the URL is shown</Label>
 			</Field>
 			<Field id="msgAttachment" type="textfield" default="">
 				<Label>Attachment:</Label>
