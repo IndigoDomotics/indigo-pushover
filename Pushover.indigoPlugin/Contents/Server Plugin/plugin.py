@@ -84,16 +84,16 @@ class Plugin(indigo.PluginBase):
 			params['url'] = self.prepareTextValue(pluginAction.props['msgSupLinkUrl'])
 
 		if self.present(pluginAction.props.get('msgAttachment')):
-			if os.path.isfile(self.prepareTextValue(pluginAction.props['msgAttachment'])) and self.prepareTextValue(pluginAction.props['msgAttachment']).lower().endswith(('.jpg', '.jpeg')):
-				if os.path.getsize(self.prepareTextValue(pluginAction.props['msgAttachment'])) <= 2621440:
+			attachFile = self.prepareTextValue(pluginAction.props['msgAttachment'])
+			if os.path.isfile(attachFile) and attachFile.lower().endswith(('.jpg', '.jpeg')):
+				if os.path.getsize(attachFile) <= 2621440:
 					attachment = {
-						"attachment": (self.prepareTextValue(pluginAction.props['msgAttachment']), open(self.prepareTextValue(pluginAction.props['msgAttachment']), "rb"), "image/jpeg")
+						"attachment": (attachFile, open(attachFile, "rb"), "image/jpeg")
 					}
 				else:
 					self.debugLog(u"Warning: attached file size was too large, attachment was skipped")
 			else:
 				self.debugLog(u"Warning: file does not exist, or is not a jpeg file, attachment was skipped")
-
 
 		if self.present(pluginAction.props.get('msgPriority')):
 			params['priority'] = pluginAction.props['msgPriority']
