@@ -1,7 +1,8 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import httplib, urllib, sys, os, requests
+import os
+import requests
 
 class Plugin(indigo.PluginBase):
 
@@ -110,16 +111,9 @@ class Plugin(indigo.PluginBase):
 		self.debugLog(u"Result: %s" % r.text)
 
 	def cancel(self, pluginAction):
-		params = {
-			'token': self.pluginPrefs['apiToken'].strip(),
-		}
+	
+		params = {'token': self.pluginPrefs['apiToken'].strip() }
+		URL = "https://api.pushover.net/1/receipts/cancel_by_tag/" + pluginAction.props['cancelTag'] + ".json"
+		r = requests.post(URL, data = params)
+		self.debugLog(u"Result: %s" % r.text)
 
-		conn = httplib.HTTPSConnection("api.pushover.net:443")
-		conn.request(
-			"POST",
-			"/1/receipts/cancel_by_tag/" + pluginAction.props['cancelTag'] + ".json",
-			urllib.urlencode(params),
-			{"Content-type": "application/x-www-form-urlencoded"}
-		)
-		self.debugLog(u"Result: %s" % conn.getresponse().read())
-		conn.close()
