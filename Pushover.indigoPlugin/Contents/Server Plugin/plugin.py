@@ -7,7 +7,7 @@ class Plugin(indigo.PluginBase):
 
 	def __init__(self, pluginId, pluginDisplayName, pluginVersion, pluginPrefs):
 		indigo.PluginBase.__init__(self, pluginId, pluginDisplayName, pluginVersion, pluginPrefs)
-		self.debug = True
+		self.debug = pluginPrefs.get("debug", False)
 
 	def __del__(self):
 		indigo.PluginBase.__del__(self)
@@ -55,18 +55,21 @@ class Plugin(indigo.PluginBase):
 	# actions go here
 	def send(self, pluginAction):
 
+		msgBody = self.prepareTextValue(pluginAction.props['msgBody'])
+
 		#fill params dictionary with required values
 		params = {
 			'token': self.pluginPrefs['apiToken'].strip(),
 			'user': self.pluginPrefs['userKey'].strip(),
-			'message': self.prepareTextValue(pluginAction.props['msgBody'])
+			'message': msgBody
 		}
 
 		attachment = {}
 
 		#populate optional parameters
 		if self.present(pluginAction.props.get('msgTitle')):
-			params['title'] = self.prepareTextValue(pluginAction.props['msgTitle']).strip()
+			msgTitle = self.prepareTextValue(pluginAction.props['msgTitle']).strip()
+			params['title'] = msgTitle
 
 		if self.present(pluginAction.props.get('msgDevice')):
 			params['device'] = pluginAction.props['msgDevice'].strip()
@@ -85,15 +88,17 @@ class Plugin(indigo.PluginBase):
 
 		if self.present(pluginAction.props.get('msgAttachment')):
 			attachFile = self.prepareTextValue(pluginAction.props['msgAttachment'])
-			if os.path.isfile(attachFile) and attachFile.lower().endswith(('.jpg', '.jpeg')):
+			extension = os.path.splitext(attachFile)[1]
+
+			if os.path.isfile(attachFile) and (extension == '.jpg' or extension == '.jpeg' or extension == '.gif'):
 				if os.path.getsize(attachFile) <= 2621440:
 					attachment = {
 						"attachment": (attachFile, open(attachFile, "rb"), "image/jpeg")
 					}
 				else:
-					self.debugLog(u"Warning: attached file size was too large, attachment was skipped")
+					self.logger.warn(u"Warning: attached file size was too large, attachment was skipped")
 			else:
-				self.debugLog(u"Warning: file does not exist, or is not a jpeg file, attachment was skipped")
+				self.logger.warn(u"Warning: file does not exist, or is not a jpeg file, attachment was skipped")
 
 		if self.present(pluginAction.props.get('msgPriority')):
 			params['priority'] = pluginAction.props['msgPriority']
@@ -108,6 +113,11 @@ class Plugin(indigo.PluginBase):
 		r = requests.post("https://api.pushover.net/1/messages.json", data = params, files = attachment)
 
 		self.debugLog(u"Result: %s" % r.text)
+
+		if r.status_code == 200:
+			self.logger.info(u"Pushover announceemnt was sent sucessfully, title: " + msgTitle + ", body: " + msgBody)
+		else:
+			self.logger.error(u"Result: %s" % r.text)
 
 	def cancel(self, pluginAction):
 		params = {

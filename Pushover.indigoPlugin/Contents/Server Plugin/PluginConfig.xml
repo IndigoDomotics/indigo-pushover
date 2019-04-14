@@ -12,5 +12,7 @@
 	<Field id="hlpUserKey" type="label" fontSize="mini" alignWithControl="true">
 		<Label>Required, can be found at https://pushover.net/dashboard</Label>
 	</Field>
+	<Field hidden="false" type="checkbox" id="debug"><Label>Debug</Label><Description></Description></Field>
+
 	<SupportURL>https://github.com/IndigoDomotics/indigo-pushover/issues</SupportURL>
 </PluginConfig>
