@@ -89,9 +89,9 @@ class Plugin(indigo.PluginBase):
 
 		if self.present(pluginAction.props.get('msgAttachment')):
 			attachFile = self.prepareTextValue(pluginAction.props['msgAttachment'])
-			extension = os.path.splitext(attachFile)[1]
+			extension = os.path.splitext(attachFile.lower())[1]
 
-			if os.path.isfile(attachFile) and (extension == '.jpg' or extension == '.jpeg' or extension == '.gif'):
+			if os.path.isfile(attachFile) and (extension in ['.jpg', '.jpeg', '.gif']):
 				if os.path.getsize(attachFile) <= 2621440:
 					attachment = {
 						"attachment": (attachFile, open(attachFile, "rb"), "image/jpeg")
@@ -99,7 +99,7 @@ class Plugin(indigo.PluginBase):
 				else:
 					self.logger.warn(u"Warning: attached file size was too large, attachment was skipped")
 			else:
-				self.logger.warn(u"Warning: file does not exist, or is not a jpeg file, attachment was skipped")
+				self.logger.warn(u"Warning: file does not exist, or is not an image file, attachment was skipped")
 
 		if self.present(pluginAction.props.get('msgPriority')):
 			params['priority'] = pluginAction.props['msgPriority']
@@ -116,7 +116,7 @@ class Plugin(indigo.PluginBase):
 		self.debugLog(u"Result: %s" % r.text)
 
 		if r.status_code == 200:
-			self.logger.info(u"Pushover announcement was sent sucessfully, title: " + msgTitle + ", body: " + msgBody)
+			self.logger.info(u"Pushover notification was sent sucessfully, title: " + msgTitle + ", body: " + msgBody)
 		else:
 			self.logger.error(u"Result: %s" % r.text)
 
