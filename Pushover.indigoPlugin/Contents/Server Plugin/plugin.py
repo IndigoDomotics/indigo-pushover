@@ -116,7 +116,7 @@ class Plugin(indigo.PluginBase):
 		self.debugLog(u"Result: %s" % r.text)
 
 		if r.status_code == 200:
-			self.logger.info(u"Pushover announceemnt was sent sucessfully, title: " + msgTitle + ", body: " + msgBody)
+			self.logger.info(u"Pushover announcement was sent sucessfully, title: " + msgTitle + ", body: " + msgBody)
 		else:
 			self.logger.error(u"Result: %s" % r.text)
 
