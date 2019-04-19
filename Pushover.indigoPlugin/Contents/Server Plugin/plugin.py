@@ -71,6 +71,9 @@ class Plugin(indigo.PluginBase):
 		if self.present(pluginAction.props.get('msgTitle')):
 			msgTitle = self.prepareTextValue(pluginAction.props['msgTitle']).strip()
 			params['title'] = msgTitle
+		else:
+			msgTitle = ''
+		
 
 		if self.present(pluginAction.props.get('msgDevice')):
 			params['device'] = pluginAction.props['msgDevice'].strip()
@@ -113,12 +116,11 @@ class Plugin(indigo.PluginBase):
 
 		r = requests.post("https://api.pushover.net/1/messages.json", data = params, files = attachment)
 
-		self.debugLog(u"Result: %s" % r.text)
-
 		if r.status_code == 200:
+    		self.debugLog(u"Result: %s" % r.text)
 			self.logger.info(u"Pushover notification was sent sucessfully, title: " + msgTitle + ", body: " + msgBody)
 		else:
-			self.logger.error(u"Result: %s" % r.text)
+			self.logger.error(u"Post Error - Result: %s" % r.text)
 
 	def cancel(self, pluginAction):
 	
