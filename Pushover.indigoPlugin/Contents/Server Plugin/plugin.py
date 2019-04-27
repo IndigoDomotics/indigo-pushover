@@ -48,9 +48,6 @@ class Plugin(indigo.PluginBase):
 
             self.debugLog(strInput)
 
-            #fix issue with special characters
-            strInput = strInput.encode('utf8')
-
             return strInput
 
     # actions go here
