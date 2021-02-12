@@ -4,6 +4,11 @@
 		<Name>Send Pushover Notification</Name>
 		<CallbackMethod>send</CallbackMethod>
 		<ConfigUI>
+            <Field id="appToken" type="menu">
+                <Label>App Token:</Label>
+                <List method="get_app_tokens" dynamicReload="true" class="self" filter=""/>
+                <CallbackMethod>menuChanged</CallbackMethod>
+            </Field>
 			<Field id="msgTitle" type="textfield" default="">
 				<Label>Title:</Label>
 			</Field>
@@ -12,6 +17,21 @@
 			</Field>
 			<Field id="msgBody" type="textfield" default="">
 				<Label>Message:</Label>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			</Field>
 			<Field id="hlpMsgBody" type="label" fontSize="mini" alignWithControl="true">
 				<Label>Required, can also contain variable and device state substitutions</Label>

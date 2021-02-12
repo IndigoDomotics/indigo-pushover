@@ -3,21 +3,36 @@
 
 import os
 import requests
+import logging
+import json
 
 class Plugin(indigo.PluginBase):
 
     def __init__(self, pluginId, pluginDisplayName, pluginVersion, pluginPrefs):
         indigo.PluginBase.__init__(self, pluginId, pluginDisplayName, pluginVersion, pluginPrefs)
-        self.debug = pluginPrefs.get("debug", False)
+        try:
+            self.logLevel = int(self.pluginPrefs[u"logLevel"])
+        except:
+            self.logLevel = logging.INFO
+        self.indigo_log_handler.setLevel(self.logLevel)
+        self.logger.debug(u"logLevel = {}".format(self.logLevel))
+
 
     def __del__(self):
         indigo.PluginBase.__del__(self)
 
     def startup(self):
-        self.debugLog(u"startup called")
+        self.logger.debug(u"startup called")
 
+        savedList = self.pluginPrefs.get(u"appTokens", None)
+        if savedList:
+            self.appTokenList = json.loads(savedList)
+        else:
+            self.appTokenList = {}        
+
+        
     def shutdown(self):
-        self.debugLog(u"shutdown called")
+        self.logger.debug(u"shutdown called")
 
     def validateActionConfigUi(self, valuesDict, typeId, deviceId):
         errorDict = indigo.Dict()
@@ -39,25 +54,25 @@ class Plugin(indigo.PluginBase):
     # helper functions
     def prepareTextValue(self, strInput):
 
-        if strInput is None:
-            return strInput
-        else:
-            strInput = strInput.strip()
+        if not strInput:
+            return strInput            
+        return self.substitute(strInput.strip())
 
-            strInput = self.substitute(strInput)
-
-            self.debugLog(strInput)
-
-            return strInput
 
     # actions go here
     def send(self, pluginAction):
+        self.logger.debug(u"send pluginAction.props = {}".format(pluginAction.props))
+    
+        appToken = pluginAction.props.get('appToken', None)
+        if not appToken:
+            appToken = self.pluginPrefs['apiToken']
+        self.logger.debug(u"appToken = {}".format(appToken))
 
         msgBody = self.prepareTextValue(pluginAction.props['msgBody'])
 
         #fill params dictionary with required values
         params = {
-            'token': self.pluginPrefs['apiToken'].strip(),
+            'token': appToken.strip(),
             'user': self.pluginPrefs['userKey'].strip(),
             'message': msgBody
         }
@@ -114,15 +129,86 @@ class Plugin(indigo.PluginBase):
         r = requests.post("https://api.pushover.net/1/messages.json", data = params, files = attachment)
 
         if r.status_code == 200:
-            self.debugLog(u"Result: {}".format(r.text))
+            self.logger.debug(u"Result: {}".format(r.text))
             self.logger.info(u"Pushover notification was sent sucessfully, title: {}, body: {}".format(msgTitle, msgBody))
         else:
             self.logger.error(u"Post Error - Result: {}".format(r.text))
+
 
     def cancel(self, pluginAction):
     
         params = {'token': self.pluginPrefs['apiToken'].strip() }
         URL = "https://api.pushover.net/1/receipts/cancel_by_tag/" + pluginAction.props['cancelTag'] + ".json"
         r = requests.post(URL, data = params)
-        self.debugLog(u"Result: %s" % r.text)
+        self.logger.debug(u"Result: %s" % r.text)
+
+    ########################################
+    # This is the method that's called by the Add Token button in the menu dialog.
+    ########################################
+
+    def addToken(self, valuesDict, typeId=None, devId=None):
+
+        appName = valuesDict["appName"]
+        appToken = valuesDict["appToken"]
+
+        tokenItem = {"name" : appName, "token" : appToken}
+        self.logger.debug(u"Adding Token {}: {}".format(appName, appToken))
+        self.appTokenList[appName] = appToken
+        self.listTokens()
+        
+        indigo.activePlugin.pluginPrefs[u"appTokens"] = json.dumps(self.appTokenList)
+
+        return valuesDict
+
+    ########################################
+    # This is the method that's called by the Delete Token button
+    ########################################
+    def deleteTokens(self, valuesDict, typeId=None, devId=None):
+        
+        for item in valuesDict["appTokenList"]:
+            self.logger.info(u"Deleting Token {}".format(item))
+            del self.appTokenList[item]
+
+        self.listTokens()
+        indigo.activePlugin.pluginPrefs[u"appTokens"] = json.dumps(self.appTokenList)
+
+        
+    def get_app_tokens(self, filter="", valuesDict=None, typeId="", targetId=0):
+        returnList = list()
+        for name in self.appTokenList:
+            returnList.append((self.appTokenList[name], name))
+        self.logger.debug(u"get_app_tokens = {}".format(returnList))
+        return sorted(returnList, key= lambda item: item[1])
+
+
+    ########################################
+    
+    def listTokens(self):
+        if len(self.appTokenList) == 0:
+            self.logger.info(u"No App Tokens Devices")
+            return
+            
+        fstring = u"{:20} {:^50}"
+        self.logger.info(fstring.format("App Name", "App Token"))
+        for name, token in self.appTokenList.iteritems():
+             self.logger.info(fstring.format(name, token))
+
+    ########################################
+    # ConfigUI methods
+    ########################################
+
+    def closedPrefsConfigUi(self, valuesDict, userCancelled):
+        if not userCancelled:
+            try:
+                self.logLevel = int(valuesDict[u"logLevel"])
+            except:
+                self.logLevel = logging.INFO
+            self.indigo_log_handler.setLevel(self.logLevel)
+            self.logger.debug(u"logLevel = {}".format(self.logLevel))
+ 
+    # doesn't do anything, just needed to force other menus to dynamically refresh
+
+    def menuChanged(self, valuesDict, typeId, devId):
+        return valuesDict
+
 

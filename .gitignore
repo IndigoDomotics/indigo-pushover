@@ -97,3 +97,8 @@ ENV/
 
 # PyCharm project data
 .idea
+.DS_Store
+
+Pushover.indigoPlugin.zip
+
+Multiple_API_Tokens.py
