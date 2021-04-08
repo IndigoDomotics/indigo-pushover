@@ -30,12 +30,14 @@ class Plugin(indigo.PluginBase):
         else:
             self.appTokenList = {}        
 
-        appToken = self.pluginPrefs['apiToken']
-
-        r = requests.get("https://api.pushover.net/1/sounds.json?token={}".format(appToken))
-        self.sounds = r.json()['sounds']
-        self.logger.debug(u"Sounds = {}".format(self.sounds))
-
+        try:
+            appToken = self.pluginPrefs['apiToken']
+            r = requests.get("https://api.pushover.net/1/sounds.json?token={}".format(appToken))
+            self.sounds = r.json()['sounds']
+            self.logger.debug(u"Sounds = {}".format(self.sounds))
+        except Exception as err:
+            self.logger.warning(u"Error getting alert sounds list: {}".format(err))
+        
         
     def shutdown(self):
         self.logger.debug(u"shutdown called")
@@ -45,9 +47,7 @@ class Plugin(indigo.PluginBase):
         for name in self.sounds:
             returnList.append((name, self.sounds[name]))
         self.logger.debug(u"get_sound_list = {}".format(returnList))
-        return sorted(returnList, key= lambda item: item[1])
-
-
+        return returnList
 
     def validateActionConfigUi(self, valuesDict, typeId, deviceId):
         errorDict = indigo.Dict()

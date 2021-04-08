@@ -42,34 +42,6 @@
                 <List method="get_sound_list" dynamicReload="true" class="self" filter=""/>
                 <CallbackMethod>menuChanged</CallbackMethod>
             </Field>
-<!--			<Field id="msgSound" type="menu" defaultValue="pushover">
-				<Label>Sound:</Label>
-				<List>
-					<Option value="pushover">Pushover (default)</Option>
-					<Option value="bike">Bike</Option>
-					<Option value="bugle">Bugle</Option>
-					<Option value="cashregister">Cash Register</Option>
-					<Option value="classical">Classical</Option>
-					<Option value="cosmic">Cosmic</Option>
-					<Option value="falling">Falling</Option>
-					<Option value="gamelan">Gamelan</Option>
-					<Option value="incoming">Incoming</Option>
-					<Option value="intermission">Intermission</Option>
-					<Option value="magic">Magic</Option>
-					<Option value="mechanical">Mechanical</Option>
-					<Option value="pianobar">Piano Bar</Option>
-					<Option value="siren">Siren</Option>
-					<Option value="spacealarm">Space Alarm</Option>
-					<Option value="tugboat">Tug Boat</Option>
-					<Option value="alien">Alien Alarm (long)</Option>
-					<Option value="climb">Climb (long)</Option>
-					<Option value="persistent">Persistent (long)</Option>
-					<Option value="echo">Pushover Echo (long)</Option>
-					<Option value="updown">Up Down (long)</Option>
-					<Option value="none">None (silent)</Option>
-				</List>
-			</Field>
--->
 			<Field id="hlpMsgSound" type="label" fontSize="mini" alignWithControl="true">
 				<Label>(Optional) Sound to play on each device instead of device's default sound</Label>
 			</Field>
