@@ -67,6 +67,12 @@
 			<Field id="hlpMsgSound" type="label" fontSize="mini" alignWithControl="true">
 				<Label>(Optional) Sound to play on each device instead of device's default sound</Label>
 			</Field>
+			<Field id="msgCustomSound" type="textfield" default="">
+				<Label>Custom Sound:</Label>
+			</Field>
+			<Field id="hlpMsgCustomSound" type="label" fontSize="mini" alignWithControl="true">
+				<Label>(Optional) Custom uploaded sound to play, overriding sound chosen above</Label>
+			</Field>
 			<Field id="msgPriority" type="menu" defaultValue="0">
 				<Label>Priority:</Label>
 				<List>

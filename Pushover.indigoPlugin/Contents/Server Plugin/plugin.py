@@ -93,7 +93,9 @@ class Plugin(indigo.PluginBase):
         if self.present(pluginAction.props.get('msgUser')):
             params['user'] = pluginAction.props['msgUser'].strip()
 
-        if self.present(pluginAction.props.get('msgSound')):
+        if self.present(pluginAction.props.get('msgCustomSound')):
+            params['sound'] = pluginAction.props["msgCustomSound"].strip()
+        elif self.present(pluginAction.props.get('msgSound')):
             params['sound'] = pluginAction.props["msgSound"].strip()
 
         if self.present(pluginAction.props.get('msgSupLinkTitle')):
