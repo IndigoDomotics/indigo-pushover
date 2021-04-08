@@ -37,7 +37,12 @@
 				<Label>Required, can also contain variable and device state substitutions</Label>
 			</Field>
 			<Field id="separator0" type="separator"/>
-			<Field id="msgSound" type="menu" defaultValue="pushover">
+            <Field id="msgSound" type="menu">
+                <Label>Sound:</Label>
+                <List method="get_sound_list" dynamicReload="true" class="self" filter=""/>
+                <CallbackMethod>menuChanged</CallbackMethod>
+            </Field>
+<!--			<Field id="msgSound" type="menu" defaultValue="pushover">
 				<Label>Sound:</Label>
 				<List>
 					<Option value="pushover">Pushover (default)</Option>
@@ -64,6 +69,7 @@
 					<Option value="none">None (silent)</Option>
 				</List>
 			</Field>
+-->
 			<Field id="hlpMsgSound" type="label" fontSize="mini" alignWithControl="true">
 				<Label>(Optional) Sound to play on each device instead of device's default sound</Label>
 			</Field>
