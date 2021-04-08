@@ -5,6 +5,7 @@ import os
 import requests
 import logging
 import json
+from collections import OrderedDict
 
 class Plugin(indigo.PluginBase):
 
@@ -33,7 +34,9 @@ class Plugin(indigo.PluginBase):
         try:
             appToken = self.pluginPrefs['apiToken']
             r = requests.get("https://api.pushover.net/1/sounds.json?token={}".format(appToken))
-            self.sounds = r.json()['sounds']
+            customdecoder = json.JSONDecoder(object_pairs_hook=OrderedDict)
+            rdict = customdecoder.decode(r.text)
+            self.sounds = rdict['sounds']
             self.logger.debug(u"Sounds = {}".format(self.sounds))
         except Exception as err:
             self.logger.warning(u"Error getting alert sounds list: {}".format(err))
