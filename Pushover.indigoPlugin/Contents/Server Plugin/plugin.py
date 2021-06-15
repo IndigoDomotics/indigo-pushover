@@ -37,10 +37,12 @@ class Plugin(indigo.PluginBase):
             customdecoder = json.JSONDecoder(object_pairs_hook=OrderedDict)
             rdict = customdecoder.decode(r.text)
             self.sounds = rdict['sounds']
-            self.logger.debug(u"Sounds = {}".format(self.sounds))
         except Exception as err:
             self.logger.warning(u"Error getting alert sounds list: {}".format(err))
-        
+            self.sounds =  OrderedDict([(u'pushover', u'Pushover (default)'), (u'bike', u'Bike'), (u'bugle', u'Bugle'), (u'cashregister', u'Cash Register'), (u'classical', u'Classical'), (u'cosmic', u'Cosmic'), (u'falling', u'Falling'), (u'gamelan', u'Gamelan'), (u'incoming', u'Incoming'), (u'intermission', u'Intermission'), (u'magic', u'Magic'), (u'mechanical', u'Mechanical'), (u'pianobar', u'Piano Bar'), (u'siren', u'Siren'), (u'spacealarm', u'Space Alarm'), (u'tugboat', u'Tug Boat'), (u'alien', u'Alien Alarm (long)'), (u'climb', u'Climb (long)'), (u'persistent', u'Persistent (long)'), (u'echo', u'Pushover Echo (long)'), (u'updown', u'Up Down (long)'), (u'vibrate', u'Vibrate Only'), (u'none', u'None (silent)')])
+        self.logger.debug(u"Sounds = {}".format(self.sounds))
+            
+					
         
     def shutdown(self):
         self.logger.debug(u"shutdown called")
