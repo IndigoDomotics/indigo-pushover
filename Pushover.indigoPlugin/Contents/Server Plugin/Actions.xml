@@ -101,6 +101,11 @@
 		<Name>Cancel Pushover Emergency-Priority Notification</Name>
 		<CallbackMethod>cancel</CallbackMethod>
 		<ConfigUI>
+            <Field id="appToken" type="menu">
+                <Label>App Token:</Label>
+                <List method="get_app_tokens" dynamicReload="true" class="self" filter=""/>
+                <CallbackMethod>menuChanged</CallbackMethod>
+            </Field>
 			<Field id="cancelTag" type="textfield" default="">
 				<Label>Tag:</Label>
 			</Field>
