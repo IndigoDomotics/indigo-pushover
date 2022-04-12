@@ -18,22 +18,15 @@ class Plugin(indigo.PluginBase):
 
         self.sounds = None
 
-        savedList = pluginPrefs.get("appTokens", None)
-        if savedList:
-            self.appTokenList = json.loads(savedList)
-        else:
-            apiToken = pluginPrefs.get('apiToken', None)
-            if not apiToken:
-                self.logger.warning(f"No App Tokens configured")
-                self.appTokenList = {}
-                return
-            else:
-                self.appTokenList['Default'] = apiToken
+
+        self.apiToken = pluginPrefs.get('apiToken', None)
+        if not self.apiToken:
+            self.logger.warning(f"PI Token not configured")
 
     def startup(self):
         self.logger.debug(f"startup called")
         try:
-            r = requests.get(f"https://api.pushover.net/1/sounds.json?token={self.appTokenList['Default']}")
+            r = requests.get(f"https://api.pushover.net/1/sounds.json?token={self.apiToken}")
             customdecoder = json.JSONDecoder(object_hook=OrderedDict)
             rdict = customdecoder.decode(r.text)
             self.sounds = rdict['sounds']
@@ -87,16 +80,11 @@ class Plugin(indigo.PluginBase):
     def send(self, pluginAction):
         self.logger.threaddebug(f"send pluginAction.props = {pluginAction.props}")
 
-        appToken = pluginAction.props.get('appToken', None)
-        if not appToken:
-            appToken = self.pluginPrefs['apiToken']
-        self.logger.debug(f"send: using appToken = {appToken}")
-
         msgBody = self.prepareTextValue(pluginAction.props['msgBody'])
 
         # fill params dictionary with required values
         params = {
-            'token': appToken.strip(),
+            'token': self.apiToken,
             'user': self.pluginPrefs['userKey'].strip(),
             'message': msgBody
         }
@@ -159,64 +147,10 @@ class Plugin(indigo.PluginBase):
 
     def cancel(self, pluginAction):
 
-        appToken = pluginAction.props.get('appToken', None)
-        if not appToken:
-            self.logger.warning(f"Unable to cancel notification - App Token not specified")
-            return
-
-        params = {'token': appToken}
+        params = {'token': self.apiToken}
         URL = f"https://api.pushover.net/1/receipts/cancel_by_tag/{pluginAction.props['cancelTag']}.json"
         r = requests.post(URL, data=params)
         self.logger.debug(f"Result: {r.text}")
-
-    ########################################
-    # This is the method that's called by the Add Token button in the menu dialog.
-    ########################################
-
-    def addToken(self, valuesDict, typeId=None, devId=None):
-
-        appName = valuesDict["appName"]
-        appToken = valuesDict["appToken"]
-
-        tokenItem = {"name": appName, "token": appToken}
-        self.logger.debug(f"Adding Token {appName}: {appToken}")
-        self.appTokenList[appName] = appToken
-        self.listTokens()
-
-        indigo.activePlugin.pluginPrefs[u"appTokens"] = json.dumps(self.appTokenList)
-
-        return valuesDict
-
-    ########################################
-    # This is the method that's called by the Delete Token button
-    ########################################
-    def deleteTokens(self, valuesDict, typeId=None, devId=None):
-
-        for item in valuesDict["appTokenList"]:
-            self.logger.info(f"Deleting Token {item}")
-            del self.appTokenList[item]
-
-        self.listTokens()
-        indigo.activePlugin.pluginPrefs["appTokens"] = json.dumps(self.appTokenList)
-
-    def get_app_tokens(self, filter="", valuesDict=None, typeId="", targetId=0):
-        returnList = list()
-        for name in self.appTokenList:
-            returnList.append((self.appTokenList[name], name))
-        self.logger.debug(f"get_app_tokens = {returnList}")
-        return sorted(returnList, key=lambda item: item[1])
-
-    ########################################
-
-    def listTokens(self):
-        if len(self.appTokenList) == 0:
-            self.logger.info(u"No App Tokens")
-            return
-
-        fstring = "{:20} {:^50}"
-        self.logger.info(fstring.format("App Name", "App Token"))
-        for name, token in self.appTokenList.items():
-            self.logger.info(fstring.format(name, token))
 
     ########################################
     # ConfigUI methods
