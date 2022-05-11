@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <PluginConfig>
-	<Field id="apiToken" type="textfield" default="" hidden="true">
+	<Field id="apiToken" type="textfield" default="">
 		<Label>API Token:</Label>
 	</Field>
-	<Field id="hlpApiToken" type="label" fontSize="mini" alignWithControl="true"  hidden="true">
+	<Field id="hlpApiToken" type="label" fontSize="mini" alignWithControl="true">
 		<Label>Required, can be created at https://pushover.net/apps/clone/indigo_domotics</Label>
 	</Field>
 	<Field id="userKey" type="textfield" default="">

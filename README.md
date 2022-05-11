@@ -1,18 +1,20 @@
 indigo-pushover
 ===============
 
-[Indigo](http://www.indigodomo.com/) plugin  - send push notifications to mobile devices via [Pushover](http://www.pushover.net).
+[Indigo](http://www.indigodomo.com/) plugin  - send push notifications via [Pushover](http://www.pushover.net).
+
+| Requirement            |                     |   |
+|------------------------|---------------------|---|
+| Minimum Indigo Version | 2022.1              |   |
+| Python Library (API)   | Official            |   |
+| Requires Local Network | No                  |   |
+| Requires Internet      | Yes                 |   |
+| Hardware Interface     | None                |   |
 
 ### Requirements
 
-1. [Indigo 6](http://www.indigodomo.com/) or later (pro version only)
 2. Valid Pushover [API key](https://pushover.net/apps/clone/indigo_domotics)
 3. Valid Pushover [user key](https://pushover.net/faq#overview-what)
-
-### Installation Instructions
-
-1. Download latest release [here](https://github.com/IndigoDomotics/indigo-pushover/releases)
-2. Follow [standard plugin installation process](http://bit.ly/1e1Vc7b)
 
 ### Actions Supported
 * Send Pushover Notification
