@@ -15,20 +15,20 @@ class Plugin(indigo.PluginBase):
         self.logLevel = int(pluginPrefs.get("logLevel", logging.INFO))
         self.indigo_log_handler.setLevel(self.logLevel)
         self.logger.debug(f"logLevel = {self.logLevel}")
-
+        self.apiToken = None
         self.sounds = None
 
+    def startup(self):
+        self.logger.debug(f"startup called")
 
         self.apiToken = pluginPrefs.get('apiToken', None)
         if not self.apiToken:
             self.logger.warning(f"PI Token not configured")
 
-    def startup(self):
-        self.logger.debug(f"startup called")
         try:
             r = requests.get(f"https://api.pushover.net/1/sounds.json?token={self.apiToken}")
-            customdecoder = json.JSONDecoder(object_hook=OrderedDict)
-            rdict = customdecoder.decode(r.text)
+            custom_decoder = json.JSONDecoder(object_hook=OrderedDict)
+            rdict = custom_decoder.decode(r.text)
             self.sounds = rdict['sounds']
         except Exception as err:
             self.logger.warning(f"Error getting alert sounds list: {err}")
@@ -156,11 +156,27 @@ class Plugin(indigo.PluginBase):
     # ConfigUI methods
     ########################################
 
+    def validatePrefsConfigUi(self, valuesDict):
+        self.logger.debug(u"validatePrefsConfigUi called")
+        errorMsgDict = indigo.Dict()
+
+        if valuesDict["apiToken"] == "":
+            errorMsgDict['apiToken'] = "API Token is required"
+
+        if len(errorMsgDict) > 0:
+            return False, valuesDict, errorMsgDict
+        return True, valuesDict
+
     def closedPrefsConfigUi(self, valuesDict, userCancelled):
+        self.logger.debug(u"closedPrefsConfigUi called")
         if not userCancelled:
             self.logLevel = int(valuesDict.get("logLevel", logging.INFO))
             self.indigo_log_handler.setLevel(self.logLevel)
             self.logger.debug(f"logLevel = {self.logLevel}")
+
+            self.apiToken = valuesDict.get('apiToken', None)
+            if not self.apiToken:
+                self.logger.error(f"API Token not configured")
 
     # doesn't do anything, just needed to force other menus to dynamically refresh
     @staticmethod
