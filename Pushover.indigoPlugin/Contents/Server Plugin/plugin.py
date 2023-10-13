@@ -18,13 +18,12 @@ class Plugin(indigo.PluginBase):
         self.apiToken = None
         self.sounds = None
 
-    def startup(self):
-        self.logger.debug(f"startup called")
-
         self.apiToken = pluginPrefs.get('apiToken', None)
         if not self.apiToken:
-            self.logger.warning(f"PI Token not configured")
+            self.logger.warning(f"API Token not configured")
 
+    def startup(self):
+        self.logger.debug(f"startup called")
         try:
             r = requests.get(f"https://api.pushover.net/1/sounds.json?token={self.apiToken}")
             custom_decoder = json.JSONDecoder(object_hook=OrderedDict)
